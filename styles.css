@@ -1,1 +1,16 @@
 /*  your css code here. If applicable */
+.code-container{
+	display:flex;
+	justify-content:center;
+	gap:20px;
+}
+.code-container .code{
+	font-size:60px;
+	text-align:center;
+	width:80px;
+	border:1px solid grey;
+	height:100px;
+}
+.code:focus {
+    border-color: #007BFF;
+}
