@@ -1,4 +1,5 @@
 //your JS code here. If required.
+document.addEventListener("DOMContentLoaded", () => {
 const inputs = document.querySelectorAll(".code");
 
     // Function to handle typing in OTP input fields
@@ -22,3 +23,4 @@ const inputs = document.querySelectorAll(".code");
             }
         });
     });
+});
