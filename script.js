@@ -1,26 +1,49 @@
-//your JS code here. If required.
-document.addEventListener("DOMContentLoaded", () => {
-const inputs = document.querySelectorAll(".code");
 
-    // Function to handle typing in OTP input fields
+    const inputs = document.querySelectorAll(".code");
+
     inputs.forEach((input, index) => {
-        input.addEventListener("input", (e) => {
-            if (e.target.value.length === 1) {
-                // Move focus to the next input field
-                if (index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
+        input.addEventListener("input", (e) =>{
+            const value = e.target.value;
+            
+            // Allow only a single digit
+            e.target.value = value.replace(/\D/g, "").charAt(0);
+
+            // Move focus to the next input if a number is entered
+            if (e.target.value && index < inputs.length - 1) {
+                inputs[index + 1].focus();
             }
         });
 
-        // Handle backspace key press
         input.addEventListener("keydown", (e) => {
-            if (e.key === "Backspace" && e.target.value === "") {
-                // Move focus to the previous input field
-                if (index > 0) {
-                    inputs[index - 1].focus();
+            // Handle backspace key press
+            if (e.key === "Backspace") {
+                if (e.target.value === "" && index > 0) {
+                    inputs[index - 1].value = ""; // Clear previous field
+                    inputs[index - 1].focus(); // Move focus back
+                }
+            }
+
+            // Handle left arrow key (move focus to previous field)
+            if (e.key === "ArrowLeft" && index > 0) {
+                inputs[index - 1].focus();
+            }
+
+            // Handle right arrow key (move focus to next field)
+            if (e.key === "ArrowRight" && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+
+        // Ensure focus moves to the first empty input when clicked
+        input.addEventListener("click", () => {
+            if (!input.value) {
+                for (let i = 0; i < inputs.length; i++) {
+                    if (!inputs[i].value) {
+                        inputs[i].focus();
+                        break;
+                    }
                 }
             }
         });
     });
-});
+
